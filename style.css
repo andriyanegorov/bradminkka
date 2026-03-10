@@ -219,6 +219,9 @@ html, body {
   width: 44px;
   height: 44px;
   background: var(--avatar-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: var(--red-main);
   border-radius: 12px;
   display: flex;
@@ -227,6 +230,11 @@ html, body {
   font-size: 20px;
   font-weight: 800;
   margin-right: 16px;
+  flex-shrink: 0;
+}
+.user-avatar[style*="background-image"] {
+  color: transparent;
+  font-size: 0;
 }
 .user-info { display: flex; flex-direction: column; }
 .user-name { font-weight: 700; font-size: 15px; }

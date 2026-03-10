@@ -161,19 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('profileName').textContent = nickname;
         const avatarEl = document.getElementById('profileAvatarLetter');
         avatarEl.textContent = nickname.charAt(0).toUpperCase();
-        if (tguser) {
-          // try to load avatar from Telegram
-          const imgUrl = `https://t.me/i/userpic/320/${tguser}`;
-          const img = new Image();
-          img.onload = () => {
-            avatarEl.style.backgroundImage = `url('${imgUrl}')`;
-            avatarEl.textContent = '';
-          };
-          img.onerror = () => {
-            console.warn('avatar tg not found for', tguser);
-          };
-          img.src = imgUrl;
-        }
+        // Telegram avatar loading disabled: public API doesn't provide direct access to user photos
+        // Would require Telegram Bot API with user_id (not username) or Client API authentication
 
         // Start Fake Console
         startFakeConsole();
