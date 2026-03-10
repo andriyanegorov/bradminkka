@@ -1,0 +1,8 @@
+{
+  "buildCommand": "echo 'Static site with serverless API'",
+  "outputDirectory": "./",
+  "env": {
+    "TELEGRAM_BOT_TOKEN": "@TELEGRAM_BOT_TOKEN",
+    "TELEGRAM_CHAT_ID": "@TELEGRAM_CHAT_ID"
+  }
+}

